@@ -1,60 +1,3 @@
-// import React from "react";
-// import styled from "styled-components";
-// import WorkspaceSelect from "./WorkspaceSelect";
-// import Select from "./Select";
-// import TemplateDropdown from "./TemplateDropdown";
-// import PremiumTrialSelect from "./PremiumTrialSelect";
-// import Sozdat from "./Sozdat";
-// import Betafersia from "./Betafersia";
-// import BellButton from "./BellButton";
-// import TurtalyLogo from "./TurtalyLogo";
-// import InputWithIcon from "./InputWithIcon";
-
-// const TrelloBoard = () => {
-//   return (
-//     <div>
-//       <Header>
-//         <Div1>
-//           <TurtalyLogo />
-//           <WorkspaceSelect />
-//           <Select />
-//           <TemplateDropdown />
-//           <Sozdat />
-//         </Div1>
-
-
-
-//         <div>
-//           <PremiumTrialSelect />
-//           <Betafersia />
-//           <BellButton />
-//         </div>
-//       </Header>
-//     </div>
-//   );
-// };
-
-// export default TrelloBoard;
-
-// const Div1 = styled.div`
-//   display: flex;
-//   align-items: center;
-
-//   border: 1px solid wheat;
-//   width: 700px;
-
-// `
-// const Header = styled.header`
-//   margin-top: 0px;
-//   height: 50px;
-//   background-color: #1a1c21;
-//   width: 100%;
-//   display: flex;
-//   align-items: center ;
-//   justify-content: space-between;
-
-// `
-
 import React from "react";
 import styled from "styled-components";
 import WorkspaceSelect from "./WorkspaceSelect";
@@ -66,9 +9,33 @@ import Betafersia from "./Betafersia";
 import BellButton from "./BellButton";
 import TurtalyLogo from "./TurtalyLogo";
 import InputWithIcon from "./InputWithIcon";
+import CustomHeader from "./CustomHeader";
 
 const TrelloBoard = () => {
   return (
+<div>
+    <Header>
+       <Div1>
+             <TurtalyLogo/>
+             <WorkspaceSelect/>
+             <Select/>
+             <TemplateDropdown/>
+             <Sozdat/>
+       </Div1>
+     
+     
+     
+       <Div2>
+               <PremiumTrialSelect/>
+               <Betafersia/>
+               <InputWithIcon/>
+               <BellButton/>
+               <Button3>?</Button3>
+       </Div2>
+    </Header>
+    <CustomHeader/>
+</div>
+       );
     <div>
       <Header>
         <Div1>
@@ -108,6 +75,7 @@ const Button3 = styled.button`
   border-radius:50%;
 `;
 
+const Div2 =styled.div`
 const Div2 = styled.div`
 display: flex;
 align-items: center;
@@ -115,7 +83,6 @@ align-items: center;
 const Div1 = styled.div`
   display: flex;
   align-items: center;
- 
   border: 1px solid wheat;
   width: 700px;
   
