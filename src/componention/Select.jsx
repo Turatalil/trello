@@ -11,7 +11,7 @@ const DropdownWrapper = styled.div`
 const DropdownButton = styled.button`
   background-color: #2c2f36;
   color: #e4e6eb;
-  padding: 10px 14px;
+  padding: 7px 10px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
