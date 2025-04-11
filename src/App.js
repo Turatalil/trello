@@ -4,9 +4,6 @@ function App() {
   return (
     <div className="App">
       <TrelloBoard/>
-
-      
-<h1>HELLOOOO</h1>
     </div>
   );
 }
