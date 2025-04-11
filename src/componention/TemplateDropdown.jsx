@@ -100,12 +100,12 @@ const templates = [
   { title: "Agile Board Template | Trello", img: "https://cdn.pixabay.com/photo/2024/04/08/22/31/forest-8684668_1280.jpg" },
   { title: "Company Overview", img: "https://cdn.pixabay.com/photo/2016/11/23/18/25/creek-1854214_1280.jpg" },
   { title: "Design Huddle", img: "https://cdn.pixabay.com/photo/2015/10/04/06/52/pathway-970705_1280.jpg" },
-  { title: "Go To Market Strategy Template", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvf-r2huj42NjNeaK_1E8TB40SC7qW-B7wUg&s" },
-  { title: "Kanban Template", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5vIhS6FX1zgB8shpku-Py3ItMk5KojEBKdw&s" },
+  { title: "Go To Market Strategy Template", img: "https://cdn.pixabay.com/photo/2024/04/10/22/52/autumn-8688876_1280.jpg" },
+  { title: "Kanban Template", img: "https://cdn.pixabay.com/photo/2018/04/06/00/25/trees-3294681_1280.jpg" },
   { title: "Mise-En-Place Personal Productivity", img: "https://s3.stroi-news.ru/img/kartinki-na-fon-noutbuka-9.jpg" },
-  { title: "Project Management", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdGkLM7eIZO74i_jn2uZmwMKDk2YL51iXpwg&s" },
-  { title: "Remote Team Meetings", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXCLwpRqQKduUvBY_TBQ_rPT3ONTE7i6wTjA&s" },
-  { title: "Simple Project Board", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTklvsDfyOs-SYOXkiaVF_6m-_RZbjh17Er_A&s" },
+  { title: "Project Management", img: "https://cdn.pixabay.com/photo/2022/01/18/16/49/town-6947538_1280.jpg" },
+  { title: "Remote Team Meetings", img: "https://cdn.pixabay.com/photo/2019/12/08/09/34/winter-4680713_1280.jpg" },
+  { title: "Simple Project Board", img: "https://cdn.pixabay.com/photo/2017/12/03/22/11/winter-landscape-2995987_1280.jpg" },
   { title: "Teaching: Weekly Planning", img: "https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1470&q=80" }
 ];
 
