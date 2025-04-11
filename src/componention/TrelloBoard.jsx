@@ -9,6 +9,7 @@ import Betafersia from "./Betafersia";
 import BellButton from "./BellButton";
 import TurtalyLogo from "./TurtalyLogo";
 import InputWithIcon from "./InputWithIcon";
+import CustomHeader from "./CustomHeader";
 
 const TrelloBoard = () => {
   return (
@@ -32,9 +33,7 @@ const TrelloBoard = () => {
                <Button3>?</Button3>
        </Div2>
     </Header>
-    <TransparentDiv> 
-
-    </TransparentDiv>
+    <CustomHeader/>
 </div>
        );
 };
@@ -53,13 +52,7 @@ const Button3 = styled.button`
   height: 38px;
   border-radius:50%;
 `;
-const TransparentDiv = styled.div`
 
-  width: 100%;
-  height: 50px;
-  background-color: rgba(255, 255, 255, 0.1);
-  
-`;
 const Div2 =styled.div`
 display: flex;
 align-items: center;
