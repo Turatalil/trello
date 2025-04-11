@@ -8,6 +8,8 @@ function App() {
       <TrelloBoard/>
       {/* <RegisterForm /> */}
       <Main />
+       <RegisterForm/>
+      <Main/>
     </div>
   );
 }

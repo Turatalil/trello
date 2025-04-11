@@ -36,6 +36,29 @@ const TrelloBoard = () => {
       <CustomHeader />
     </div>
   );
+<div>
+    <Header>
+       <Div1>
+             <TurtalyLogo/>
+             <WorkspaceSelect/>
+             <Select/>
+             <TemplateDropdown/>
+             <Sozdat/>
+       </Div1>
+     
+     
+     
+       <Div2>
+               <PremiumTrialSelect/>
+               <Betafersia/>
+               <InputWithIcon/>
+               <BellButton/>
+               <Button3>?</Button3>
+       </Div2>
+    </Header>
+    <CustomHeader/>
+</div>
+       );
 };
 
 export default TrelloBoard;
