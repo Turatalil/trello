@@ -8,7 +8,7 @@ const DropdownWrapper = styled.div`
 `;
 
 const DropdownButton = styled.button`
-  background-color: #2c2f36;
+  background-color: transparent;
   color: #e4e6eb;
   padding: 10px 14px;
   border: none;
@@ -18,6 +18,7 @@ const DropdownButton = styled.button`
   display: flex;
   align-items: center;
   gap: 8px;
+  
 `;
 
 const DropdownList = styled.div`
@@ -39,6 +40,7 @@ const DropdownItem = styled.div`
   gap: 12px;
   cursor: pointer;
   color: white;
+  background-color: transparent;
 
   &:hover {
     background-color: #31343a;
