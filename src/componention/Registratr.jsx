@@ -1,25 +1,57 @@
-// src/componention/Registratr.jsx
-import styled from "styled-components"
-import { FcGoogle } from "react-icons/fc"
-import { FaMicrosoft, FaApple } from "react-icons/fa"
-import { FaSlack } from "react-icons/fa6"
-import TurtalyLogo from "./TurtalyLogo"
+import styled from "styled-components";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";  // useNavigate импорттоо
+import { FcGoogle } from "react-icons/fc";
+import { FaMicrosoft, FaApple } from "react-icons/fa";
+import { FaSlack } from "react-icons/fa6";
+import TurtalyLogo from "./TurtalyLogo";
 
 export default function RegisterForm() {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const navigate = useNavigate(); // useNavigate хугун колдонуу
+
+  const handleRegister = () => {
+    if (!email) {
+      setError("Электрондук почта дарегин жазыңыз.");
+      setSuccess("");
+    } else if (!/^[^\s@]+@gmail\.com$/.test(email)) {
+      setError("Дарек туура эмес же @gmail.com менен аякташы керек.");
+      setSuccess("");
+    } else {
+      setError("");
+      setSuccess("Катталуу ийгиликтүү!");
+
+      // Катталуу ийгиликтүү болгондо TrelloBoard бетине багыттоо
+      setTimeout(() => {
+        navigate("/dashboard"); // /dashboard бетине өтүү
+      }, 1000); 
+    }
+  };
+
   return (
     <Background>
-      <SideImage src="/left-illustration.png" alt="left" className="left" />
+  
       <Card>
-       <TurtalyLogo/>
+        <TurtalyLogo />
         <Title>Зарегистрируйтесь, чтобы продолжить</Title>
 
-        <Input placeholder="Введите ваш адрес электронной почты" />
+        <Input
+          placeholder="Введите ваш адрес электронной почты"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        {error && <ErrorMessage>{error}</ErrorMessage>}
+        {success && <SuccessMessage>{success}</SuccessMessage>}
 
         <Note>
           Регистрируясь, я соглашаюсь с Условиями использования продуктов Cloud и принимаю Политику конфиденциальности Atlassian.
         </Note>
 
-        <Button primary>Зарегистрироваться</Button>
+        <Button primary onClick={handleRegister}>
+          Зарегистрироваться
+        </Button>
 
         <SmallText>Или продолжить с помощью:</SmallText>
 
@@ -40,145 +72,143 @@ export default function RegisterForm() {
           Кроме того, действуют положения Политики конфиденциальности и Условий использования Google.
         </FooterNote>
       </Card>
-      <SideImage src="/right-illustration.png" alt="right" className="right" />
+      
     </Background>
-  )
+  );
 }
 
-// ----------------------------
-// Styled Components
-// ----------------------------
+const SuccessMessage = styled.p`
+  color: green;
+  font-size: 0.8rem;
+  margin-top: -0.4rem;
+  margin-bottom: 0.7rem;
+  text-align: left;
+`;
 
 const Background = styled.div`
+  background-image: url("https://cdn.pixabay.com/photo/2014/11/22/18/38/christmas-background-541922_1280.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f5f6f8;
-  min-height: 100vh;
   position: relative;
-  padding: 2rem;
-`
-
-const SideImage = styled.img`
-  position: absolute;
-  bottom: 0;
-  height: 200px;
-
-  &.left {
-    left: 2%;
-  }
-
-  &.right {
-    right: 2%;
-  }
-
-  @media (max-width: 768px) {
-    display: none;
-  }
-`
+`;
 
 const Card = styled.div`
-  background: white;
+  background-color: white;
+  width: 400px;
   padding: 2rem;
-  border-radius: 10px;
-  width: 100%;
-  max-width: 400px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 7px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   text-align: center;
-  z-index: 2;
-`
-
-const Logo = styled.img`
-  width: 100px;
-  margin: 0 auto;
-  margin-bottom: 1rem;
-`
-
-const LogoSmall = styled.img`
-  width: 120px;
-  margin-bottom: 0.5rem;
-`
+  z-index: 10;
+`;
 
 const Title = styled.h2`
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 600;
   margin-bottom: 1rem;
-`
+`;
 
 const Input = styled.input`
-  width: 100%;
-  padding: 10px 14px;
-  border: 1px solid #ccc;
+  width: 96%;
+  padding: 0.6rem;
   border-radius: 6px;
-  font-size: 1rem;
-  margin-bottom: 0.75rem;
-  &:focus {
-    outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
-  }
-`
+  border: 1px solid #ccc;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+`;
+
+const ErrorMessage = styled.p`
+  color: red;
+  font-size: 0.8rem;
+  margin-top: -0.4rem;
+  margin-bottom: 0.7rem;
+  text-align: left;
+`;
 
 const Note = styled.p`
   font-size: 0.75rem;
-  color: #6b7280;
+  color: #666;
   margin-bottom: 1rem;
-`
+`;
 
 const Button = styled.button`
   width: 100%;
   padding: 0.6rem;
+  margin: 0.4rem 0;
+  border: none;
   border-radius: 6px;
-  font-weight: 500;
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-  cursor: pointer;
+  font-size: 0.9rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-
-  background: ${({ primary }) => (primary ? "#0052cc" : "#fff")};
-  color: ${({ primary }) => (primary ? "#fff" : "#333")};
-  border: ${({ primary }) => (primary ? "none" : "1px solid #ccc")};
+  background-color: ${(props) => (props.primary ? "#0052cc" : "#ffffff")};
+  color: ${(props) => (props.primary ? "white" : "#333")};
+  border: ${(props) => (props.primary ? "none" : "1px solid #ccc")};
+  cursor: pointer;
 
   &:hover {
-    background: ${({ primary }) => (primary ? "#0747a6" : "#f2f2f2")};
+    background-color: ${(props) => (props.primary ? "#0747a6" : "#f1f1f1")};
   }
-`
+`;
 
 const SocialButtons = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  margin-top: 0.5rem;
-`
+  margin-bottom: 1rem;
+`;
 
 const SmallText = styled.p`
-  font-size: 0.85rem;
-  color: #555;
   margin: 1rem 0 0.5rem;
-`
+  font-size: 0.85rem;
+  color: #666;
+`;
 
 const LoginLink = styled.p`
   font-size: 0.85rem;
   color: #0052cc;
-  margin-top: 1rem;
   cursor: pointer;
-  &:hover {
-    text-decoration: underline;
-  }
-`
+  margin-top: 0.5rem;
+`;
 
 const Divider = styled.hr`
-  margin: 1.5rem 0;
   border: none;
-  border-top: 1px solid #e0e0e0;
-`
+  border-top: 1px solid #ddd;
+  margin: 1.5rem 0;
+`;
 
 const FooterNote = styled.p`
   font-size: 0.75rem;
-  color: #888;
-  text-align: center;
-`
+  color: #999;
+  line-height: 1.4;
+`;
 
+const LogoSmall = styled.img`
+  width: 80px;
+  margin: 0 auto 0.5rem;
+`;
+
+const SideImage = styled.img`
+  position: absolute;
+  bottom: 0;
+  width: 250px;
+
+  &:first-of-type {
+    left: 0;
+  }
+
+  &:last-of-type {
+    right: 0;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
