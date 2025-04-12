@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { FaStar, FaRocket, FaBolt, FaFilter, FaUserFriends } from "react-icons/fa";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { FiShare } from "react-icons/fi";
 
+
 const CustomHeader = () => {
+ 
   return (
     <HeaderContainer>
       <LeftSection>
+    
         <Logo>baitur</Logo>
         <FaStar color="white" style={{ marginLeft: "10px" }} />
         <Label>

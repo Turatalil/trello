@@ -32,7 +32,7 @@ export default function RegisterForm() {
 
   return (
     <Background>
-      <SideImage src="/left-illustration.png" alt="left" />
+  
       <Card>
         <TurtalyLogo />
         <Title>Зарегистрируйтесь, чтобы продолжить</Title>
@@ -72,7 +72,7 @@ export default function RegisterForm() {
           Кроме того, действуют положения Политики конфиденциальности и Условий использования Google.
         </FooterNote>
       </Card>
-      <SideImage src="/right-illustration.png" alt="right" />
+      
     </Background>
   );
 }
