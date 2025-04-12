@@ -29,9 +29,9 @@ const ButtonViaMain = () => {
     }
     dispatch(buttonViaMainSlice.actions.addSpisokTwo(newComment))
     if (!inputDobValue.trim()) {
-      return 
+      return window.alert("")
     }
-    setInputDobValue("")
+    setInputDobValue("Инпуттарды толтурунуз!")
   }
 
   const handleClose = () => {
@@ -125,6 +125,7 @@ const Buttons  = styled.div`
 `
 const ButtonsButtonBit = styled.button`
     background-color: #579dff;
+    
   border: none;
   color: white;
   padding: 8px 12px;
@@ -140,6 +141,7 @@ const MuiStyled = styled.div`
 const InputHandlerClick = styled.div`
   border: 1px solid red;
   border-radius: 12px;
+  color: white;
 `
 
 const GlobalMapDivContainer = styled.div`
