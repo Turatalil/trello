@@ -22,7 +22,6 @@ const TrelloBoard = () => {
           <TemplateDropdown />
           <Sozdat />
         </Div1>
-
         <Div2>
           <PremiumTrialSelect />
           <Betafersia />
@@ -34,6 +33,29 @@ const TrelloBoard = () => {
       <CustomHeader />
     </div>
   );
+<div>
+    <Header>
+       <Div1>
+             <TurtalyLogo/>
+             <WorkspaceSelect/>
+             <Select/>
+             <TemplateDropdown/>
+             <Sozdat/>
+       </Div1>
+     
+     
+     
+       <Div2>
+               <PremiumTrialSelect/>
+               <Betafersia/>
+               <InputWithIcon/>
+               <BellButton/>
+               <Button3>?</Button3>
+       </Div2>
+    </Header>
+    <CustomHeader/>
+</div>
+       );
 };
 
 export default TrelloBoard;
@@ -72,3 +94,26 @@ const Header = styled.header`
   align-items: center;
   justify-content: space-between;
 `;
+  border-radius:50%;
+`
+
+const Div2 = styled.div`
+display: flex;
+align-items: center;
+`
+
+const Div1 = styled.div`
+display: flex;
+align-items: center;
+border: 1px solid solid;
+width: 700px;
+`
+const Header = styled.header`
+margin-top: 0px;
+height: 50px;
+background-color: #1a1c21;
+width: 100%;
+display: flex;
+align-items: center;
+justify-content: space-between;
+`

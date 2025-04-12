@@ -13,6 +13,11 @@ function App() {
           <Route path="/main" element={<Main />} />
         </Routes>
       </BrowserRouter>
+      <TrelloBoard/>
+      {/* <RegisterForm /> */}
+      <Main />
+       <RegisterForm/>
+      <Main/>
     </div>
   );
 }
