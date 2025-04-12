@@ -1,16 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { act } from "react"
 
 const initialState = {
-    users: []
+    users: [],
+    usersMap: [],
+    addHandler: false,
 }
 
 export const buttonViaMainSlice = createSlice({
     name: "button",
     initialState,
     reducers: {
-        addSpisok(state, action){
-                state.users.push(action.payload)
-        }
+        addList: (state, action) => {
+            state.users.push(action.payload);
+          },
+          
+          addCardToList: (state, action) => {
+            const { listId, newCard } = action.payload;
+            const list = state.users.find((l) => l.id === listId);
+            if (list) {
+              list.cards.push(newCard);
+            }
+          },
+          
     }
 })
+
+  
