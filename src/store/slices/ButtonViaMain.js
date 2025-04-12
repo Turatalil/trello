@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { act } from "react"
 
 const initialState = {
-    users: []
+    users: [],
+    usersMap: []
 }
 
 export const buttonViaMainSlice = createSlice({
@@ -11,6 +11,9 @@ export const buttonViaMainSlice = createSlice({
     reducers: {
         addSpisok(state, action){
                 state.users.push(action.payload)
+        },
+        addSpisokTwo(state, action){
+            state.usersMap.push(action.payload)
         }
     }
 })
