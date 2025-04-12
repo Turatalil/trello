@@ -10,10 +10,10 @@ function App() {
         <Routes>
           <Route path="/" element={<RegisterForm />} />
           <Route path="/dashboard" element={<TrelloBoard />} />
-          <Route path="/main" element={<Main />} />
+          {/* <Route path="/main" element={<Main />} /> */}
         </Routes>
       </BrowserRouter>
-       {/* <RegisterForm/> */}
+      {/* <Main/> */}
     </div>
   );
 }
