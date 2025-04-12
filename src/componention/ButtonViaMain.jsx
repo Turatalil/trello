@@ -7,16 +7,39 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 const ButtonViaMain = () => {
   const [showInput, setShowInput] = useState(false);
   const [inputValue, setInputValue] = useState("")
-  const { users } = useSelector((state) => state.basket)
+  const [inputDobValue, setInputDobValue] = useState("")
+  const [showInputTwo, setShowInputTwo] = useState(false)
+  const { users , usersMap} = useSelector((state) => state.basket)
   const dispatch = useDispatch()
-  console.log(users);
+  console.log(usersMap);
+  
 
   const handleAddClick = () => {
     setShowInput(true);
   };
+
+  const addClickHandlerTwo=()=>{
+    setShowInputTwo(true)
+  }
+  
+  const addHandlerClickValue = ()=>{
+    const newComment = {
+      name: inputDobValue,
+      id: Date.now()
+    }
+    dispatch(buttonViaMainSlice.actions.addSpisokTwo(newComment))
+    if (!inputDobValue.trim()) {
+      return 
+    }
+    setInputDobValue("")
+  }
+
   const handleClose = () => {
     setShowInput(false);
   };
+  const handlerCloseTwo = ()=>{
+    setShowInputTwo(false)
+  }
   const clickChangeHandler = (e) => {
     setInputValue(e.target.value)
   }
@@ -33,11 +56,14 @@ const ButtonViaMain = () => {
     setInputValue("")
   }
 
+  const clickInpuHandlerValue =(e)=>{
+    setInputDobValue(e.target.value)
+  }
   return (
     <Wrapper>
         {users.map((el) => (
       <BasketContainer>
-          <GlobalMapDivContainer>
+          <GlobalMapDivContainer key={el.id}>
             <BasketContainerMapName key={el.id}>
               <h2>{el.name}</h2>
             </BasketContainerMapName>
@@ -45,10 +71,31 @@ const ButtonViaMain = () => {
               <MoreHorizIcon style={{cursor: "pointer"}}/>
             </MuiStyled>
           </GlobalMapDivContainer>
-          <AddEsheButton>
-          <span>+</span> Добавить список
+          <div>
+          {
+            usersMap.map((el) => {
+              return <InputHandlerClick key={el.id}>
+                <h2>{el.name}</h2>
+              </InputHandlerClick>
+            })
+          }
+          </div>
+          <AddEsheButton onClick={addClickHandlerTwo}>
+          <span>+</span> Добавить карточку
         </AddEsheButton>
-        <InputField placeholder='Введите название или вставьте сслыку'/>
+        <div>
+        </div>
+        <div>
+{    showInputTwo &&    <ButtonRowTow>
+          <div>
+        <InputFieldTwoStyle onChange={clickInpuHandlerValue}  placeholder='Введите название или вставьте  сслыку'/>
+          </div>
+          <Buttons>
+            <ButtonsButtonBit onClick={addHandlerClickValue}>Добавить карточку</ButtonsButtonBit>
+            <buttton onClick={handlerCloseTwo}>✕</buttton>
+          </Buttons>
+          </ButtonRowTow>}
+        </div>
       </BasketContainer>
         ))}
       {!showInput && (
@@ -71,10 +118,28 @@ const ButtonViaMain = () => {
 
 export default ButtonViaMain;
 
+const Buttons  = styled.div`
+  display: flex;
+  gap: 2em; 
+  align-items: center;
+`
+const ButtonsButtonBit = styled.button`
+    background-color: #579dff;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+`
 const MuiStyled = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`
+
+const InputHandlerClick = styled.div`
+  border: 1px solid red;
+  border-radius: 12px;
 `
 
 const GlobalMapDivContainer = styled.div`
@@ -92,6 +157,7 @@ const BasketContainerMapName = styled.div`
 const AddEsheButton = styled.button`
   border: none;
   margin-top: 10px;
+  margin-bottom: 19px;
   background-color: transparent;
   color: #9FADBC;
   padding: 9px 12px 9px 8px;
@@ -103,6 +169,17 @@ const AddEsheButton = styled.button`
     border-radius: 10px;
     padding: 9px 12px 9px 8px;
   }
+`
+const ButtonRowTow = styled.div`
+  display: flex;
+  flex-direction: column;
+  
+  button{
+    width: 150px;
+  }
+`
+const ButtonRowButtonTwo = styled.button`
+  
 `
 const BasketContainer = styled.div`
   margin-top: 20px;
@@ -164,6 +241,21 @@ const InputField = styled.input`
   border: 1px solid #3d3d3d;
   margin-bottom: 10px;
 `;
+
+const InputFieldTwoStyle = styled.input`
+    padding: 10px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  width: 256px;
+  height: 76px;
+  font-size: 14px;
+  background-color: #1f1f1f;
+  color: white;
+  border: 1px solid #3d3d3d;
+  margin-bottom: 10px;
+  overflow-wrap: anywhere;
+`
 
 const ButtonRow = styled.div`
   display: flex;
