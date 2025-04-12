@@ -10,6 +10,7 @@ import BellButton from "./BellButton";
 import TurtalyLogo from "./TurtalyLogo";
 import InputWithIcon from "./InputWithIcon";
 import CustomHeader from "./CustomHeader";
+import Main from "./Main";
 
 const TrelloBoard = () => {
   return (
@@ -31,6 +32,7 @@ const TrelloBoard = () => {
         </Div2>
       </Header>
       <CustomHeader />
+      <Main/>
     </div>
   );
 };
