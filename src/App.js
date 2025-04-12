@@ -10,9 +10,13 @@ function App() {
         <Routes>
           <Route path="/" element={<RegisterForm />} />
           <Route path="/dashboard" element={<TrelloBoard />} />
-          <Route path="/main" element={<Main />} />
+          {/* <Route path="/main" element={<Main />} /> */}
         </Routes>
       </BrowserRouter>
+<<<<<<< HEAD
+=======
+      {/* <Main/> */}
+>>>>>>> a350e12beca9ccae316c83ebf003ac0d90f87153
     </div>
   );
 }
