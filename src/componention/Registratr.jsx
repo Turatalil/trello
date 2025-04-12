@@ -61,9 +61,7 @@ export default function RegisterForm() {
           <Button><FaApple size={20} /> Apple</Button>
           <Button><FaSlack size={20} style={{ color: "#611f69" }} /> Slack</Button>
         </SocialButtons>
-
         <LoginLink>Уже есть аккаунт Atlassian? Войти</LoginLink>
-
         <Divider />
         <FooterNote>
           <LogoSmall src="/atlassian-logo.png" alt="Atlassian" />

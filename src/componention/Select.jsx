@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Star } from "lucide-react"; // lucide-react — жеңил иконалар үчүн
-
+import { Star } from "lucide-react"; 
 const DropdownWrapper = styled.div`
   position: relative;
   display: inline-block;

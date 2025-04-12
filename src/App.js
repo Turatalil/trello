@@ -14,10 +14,15 @@ function App() {
         </Routes>
       </BrowserRouter>
       <TrelloBoard/>
+<<<<<<< HEAD
+       {/* <RegisterForm/> */}
+            <Main/>/
+=======
       {/* <RegisterForm /> */}
       <Main />
        <RegisterForm/>
       <Main/>
+>>>>>>> af007bec819a334e0e83abace423be9451cc1b83
     </div>
   );
 }

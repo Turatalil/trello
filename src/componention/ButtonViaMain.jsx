@@ -48,7 +48,7 @@ const ButtonViaMain = () => {
           <AddEsheButton>
           <span>+</span> Добавить список
         </AddEsheButton>
-
+        <InputField placeholder='Введите название или вставьте сслыку'/>
       </BasketContainer>
         ))}
       {!showInput && (
