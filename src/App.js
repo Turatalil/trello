@@ -13,10 +13,6 @@ function App() {
           {/* <Route path="/main" element={<Main />} /> */}
         </Routes>
       </BrowserRouter>
-<<<<<<< HEAD
-=======
-      {/* <Main/> */}
->>>>>>> a350e12beca9ccae316c83ebf003ac0d90f87153
     </div>
   );
 }
