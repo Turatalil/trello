@@ -1,15 +1,17 @@
+
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { buttonViaMainSlice } from "../store/slices/ButtonViaMain";
+import { addList, addCardToList, removeCardFromList, removeList, updateListName, updateCardName } from "../store/slices/ButtonViaMain";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
+// Стилдер
 const Wrapper = styled.div`
   margin-left: 20px;
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
-  align-items: flex-start; /* ← Ар бир контейнер өз бийиктиги менен жайгашат */
+  align-items: flex-start;
   padding: 10px;
 `;
 
@@ -23,12 +25,12 @@ const BasketContainer = styled.div`
   flex-direction: column;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   color: white;
-  max-height: 400px; /* ← Ар бир контейнердин максималдуу бийиктиги */
+  max-height: 400px;
 `;
 
 const CardsContainer = styled.div`
-  max-height: 300px; /* ← Карточкалар үчүн максималдуу бийиктик */
-  overflow-y: auto; /* ← Вертикалдуу скролл кошуу */
+  max-height: 300px;
+  overflow-y: auto;
   margin-bottom: 10px;
   &::-webkit-scrollbar {
     width: 6px;
@@ -149,22 +151,21 @@ const InputHandlerClick = styled.div`
   border-radius: 12px;
   padding: 8px;
   margin: 5px 0;
-  &:hover{
+  &:hover {
     background-color: #b0b0b031;
-    transform: 1s;
     transition: 0.7s ease-in-out;
   }
   h2 {
     margin: 0;
     font-size: 14px;
-    word-break: break-all;
+    word-break: break-word;
   }
 `;
 
 const GlobalMapDivContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 `;
 
 const BasketContainerMapName = styled.div`
@@ -196,11 +197,79 @@ const ButtonRowTow = styled.div`
   flex-direction: column;
 `;
 
+const EditButton = styled.button`
+  background-color: #579dff;
+  border: none;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: #4681db;
+  }
+`;
+
+const DeleteButton = styled.button`
+  background-color: #ff4d4f;
+  border: none;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: #d9363e;
+  }
+`;
+
+const EditInput = styled.input`
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #3d3d3d;
+  background-color: #1f1f1f;
+  color: white;
+  width: 100%;
+  font-size: 14px;
+  margin-bottom: 5px;
+`;
+
+const Menu = styled.div`
+  position: absolute;
+  background-color: #1f1f1f;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0;
+`;
+
+const MenuItem = styled.button`
+  background: none;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  text-align: left;
+  cursor: pointer;
+  &:hover {
+    background-color: #579dff;
+  }
+`;
+
+// Компонент
 const ButtonViaMain = () => {
   const [showInput, setShowInput] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [inputDobValue, setInputDobValue] = useState("");
   const [activeListId, setActiveListId] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(null);
+  const [editingListId, setEditingListId] = useState(null);
+  const [editValue, setEditValue] = useState("");
+  const [editingCard, setEditingCard] = useState(null);
+  const [editCardValue, setEditCardValue] = useState("");
 
   const { users } = useSelector((state) => state.basket);
   const dispatch = useDispatch();
@@ -226,13 +295,14 @@ const ButtonViaMain = () => {
       id: Date.now(),
       name: inputDobValue,
     };
-    dispatch(buttonViaMainSlice.actions.addCardToList({ listId, newCard }));
+    dispatch(addCardToList({ listId, newCard }));
     setInputDobValue("");
     setActiveListId(null);
   };
 
   const handleClose = () => {
     setShowInput(false);
+    setInputValue("");
   };
 
   const handleListAdd = () => {
@@ -245,29 +315,130 @@ const ButtonViaMain = () => {
       name: inputValue,
       cards: [],
     };
-    dispatch(buttonViaMainSlice.actions.addList(newList));
+    dispatch(addList(newList));
     setInputValue("");
     setShowInput(false);
   };
 
+  const toggleMenu = (listId) => {
+    setMenuOpen(menuOpen === listId ? null : listId);
+  };
+
+  const handleDeleteList = (listId) => {
+    dispatch(removeList(listId));
+    setMenuOpen(null);
+  };
+
+  const handleEditList = (listId, currentName) => {
+    setEditingListId(listId);
+    setEditValue(currentName);
+    setMenuOpen(null);
+  };
+
+  const handleSaveEdit = (listId) => {
+    if (!editValue.trim()) {
+      alert("Введите новое название!");
+      return;
+    }
+    dispatch(updateListName({ listId, newName: editValue }));
+    setEditingListId(null);
+    setEditValue("");
+  };
+
+  const handleEditCard = (listId, cardId, currentName) => {
+    setEditingCard({ listId, cardId });
+    setEditCardValue(currentName);
+  };
+
+  const handleSaveCardEdit = (listId, cardId) => {
+    if (!editCardValue.trim()) {
+      alert("Введите новое название карточки!");
+      return;
+    }
+    dispatch(updateCardName({ listId, cardId, newName: editCardValue }));
+    setEditingCard(null);
+    setEditCardValue("");
+  };
+
+  const handleCancelCardEdit = () => {
+    setEditingCard(null);
+    setEditCardValue("");
+  };
+
   return (
     <Wrapper>
-
       {users.map((list) => (
         <BasketContainer key={list.id}>
           <GlobalMapDivContainer>
-            <BasketContainerMapName>
-              <h2>{list.name}</h2>
-            </BasketContainerMapName>
+            {editingListId === list.id ? (
+              <div>
+                <InputField
+                  value={editValue}
+                  onChange={(e) => setEditValue(e.target.value)}
+                  placeholder="Введите новое название..."
+                />
+                <ButtonRow>
+                  <AddButton onClick={() => handleSaveEdit(list.id)}>Сохранить</AddButton>
+                  <CloseButton onClick={() => setEditingListId(null)}>✕</CloseButton>
+                </ButtonRow>
+              </div>
+            ) : (
+              <BasketContainerMapName>
+                <h2>{list.name}</h2>
+              </BasketContainerMapName>
+            )}
             <MuiStyled>
-              <MoreHorizIcon style={{ cursor: "pointer" }} />
+              <MoreHorizIcon style={{ cursor: "pointer" }} onClick={() => toggleMenu(list.id)} />
+              {menuOpen === list.id && (
+                <Menu>
+                  <MenuItem onClick={() => handleEditList(list.id, list.name)}>Изменить</MenuItem>
+                  <MenuItem onClick={() => handleDeleteList(list.id)}>Удалить</MenuItem>
+                </Menu>
+              )}
             </MuiStyled>
           </GlobalMapDivContainer>
 
           <CardsContainer>
             {list.cards?.map((card) => (
               <InputHandlerClick key={card.id}>
-                <h2>{card.name}</h2>
+                <GlobalMapDivContainer>
+                  {editingCard?.listId === list.id && editingCard?.cardId === card.id ? (
+                    <div style={{ width: "100%" }}>
+                      <EditInput
+                        value={editCardValue}
+                        onChange={(e) => setEditCardValue(e.target.value)}
+                        placeholder="Введите новое название..."
+                      />
+                      <ButtonRow>
+                        <AddButton onClick={() => handleSaveCardEdit(list.id, card.id)}>
+                          Сохранить
+                        </AddButton>
+                        <CloseButton onClick={handleCancelCardEdit}>✕</CloseButton>
+                      </ButtonRow>
+                    </div>
+                  ) : (
+                    <>
+                      <h2>{card.name}</h2>
+                      <ButtonRow>
+                        <EditButton onClick={() => handleEditCard(list.id, card.id, card.name)}>
+                          Изменить
+                        </EditButton>
+                        <DeleteButton
+                          onClick={() =>
+                            dispatch(
+                              removeCardFromList({
+                                listId: list.id,
+                                cardId: card.id,
+                              })
+                            )
+                          }
+                        >
+                          Удалить
+                        </DeleteButton>
+                      </ButtonRow>
+                    </>
+                  )}
+                </GlobalMapDivContainer>
               </InputHandlerClick>
             ))}
           </CardsContainer>

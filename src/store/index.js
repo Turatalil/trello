@@ -1,8 +1,10 @@
-import { combineSlices, configureStore } from "@reduxjs/toolkit";
-import { buttonViaMainSlice } from "./slices/ButtonViaMain";
 
-const rootSlices = combineSlices({
-    basket: buttonViaMainSlice.reducer
-})
+import { configureStore } from "@reduxjs/toolkit";
+import basketReducer from "./slices/ButtonViaMain";
 
-export const store = configureStore({reducer: rootSlices})
+export const store = configureStore({
+  reducer: {
+    basket: basketReducer,
+  },
+});
+
