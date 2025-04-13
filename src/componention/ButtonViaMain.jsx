@@ -10,7 +10,6 @@ const Wrapper = styled.div`
   margin-left: 20px;
   display: flex;
   gap: 20px;
-  flex-wrap: wrap;
   align-items: flex-start;
   padding: 10px;
 `;
