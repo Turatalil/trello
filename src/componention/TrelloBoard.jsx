@@ -60,7 +60,6 @@ const Div2 = styled.div`
 const Div1 = styled.div`
   display: flex;
   align-items: center;
-  border: 1px solid wheat;
   width: 700px;
 `;
 

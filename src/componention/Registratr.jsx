@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";  // useNavigate импорттоо
+import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaMicrosoft, FaApple } from "react-icons/fa";
 import { FaSlack } from "react-icons/fa6";
@@ -9,52 +9,57 @@ import TurtalyLogo from "./TurtalyLogo";
 export default function RegisterForm() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  const navigate = useNavigate(); // useNavigate хугун колдонуу
+  const [pass, setPass] = useState("")
+  const [password, setPassword] = useState(false)
+  const navigate = useNavigate();
 
   const handleRegister = () => {
-    if (!email) {
-      setError("Электрондук почта дарегин жазыңыз.");
-      setSuccess("");
-    } else if (!/^[^\s@]+@gmail\.com$/.test(email)) {
-      setError("Дарек туура эмес же @gmail.com менен аякташы керек.");
-      setSuccess("");
+    const emailUser = "Zhamshitov06@gmail.com";
+    const passwordUser = "12345678";
+  
+    if (!password) {
+      if (email === emailUser) {
+        setPassword(true); 
+        setError(""); 
+      } else {
+        setError("Почтаны жазууда ката кетти?");
+      }
     } else {
-      setError("");
-      setSuccess("Катталуу ийгиликтүү!");
-
-      // Катталуу ийгиликтүү болгондо TrelloBoard бетине багыттоо
-      setTimeout(() => {
-        navigate("/dashboard"); // /dashboard бетине өтүү
-      }, 1000); 
+      if (pass === passwordUser) {
+        setError("");
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 2000);
+      } else {
+        setError("Парольду киргизүүдө ката бар!");
+      }
     }
   };
+  
 
   return (
     <Background>
-  
       <Card>
         <TurtalyLogo />
         <Title>Зарегистрируйтесь, чтобы продолжить</Title>
-
-        <Input
+        {!password && <Input
           placeholder="Введите ваш адрес электронной почты"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-        />
+        />}
+{     password && <Input
+            value={pass}
+            onChange={(e) => setPass(e.target.value)}
+            placeholder="Введите пароль"
+          />}
         {error && <ErrorMessage>{error}</ErrorMessage>}
-        {success && <SuccessMessage>{success}</SuccessMessage>}
-
         <Note>
           Регистрируясь, я соглашаюсь с Условиями использования продуктов Cloud и принимаю Политику конфиденциальности Atlassian.
         </Note>
-
         <Button primary onClick={handleRegister}>
           Зарегистрироваться
         </Button>
-
         <SmallText>Или продолжить с помощью:</SmallText>
-
         <SocialButtons>
           <Button><FcGoogle size={20} /> Google</Button>
           <Button><FaMicrosoft size={20} /> Microsoft</Button>
@@ -70,10 +75,13 @@ export default function RegisterForm() {
           Кроме того, действуют положения Политики конфиденциальности и Условий использования Google.
         </FooterNote>
       </Card>
-      
+
     </Background>
   );
 }
+const GlobalFieldStyle = styled.div`
+  margin-top: 2em;
+`
 
 const SuccessMessage = styled.p`
   color: green;
@@ -119,12 +127,13 @@ const Input = styled.input`
   border: 1px solid #ccc;
   margin-bottom: 0.5rem;
   font-size: 0.95rem;
+  height: 30px;
 `;
 
 const ErrorMessage = styled.p`
   color: red;
   font-size: 0.8rem;
-  margin-top: -0.4rem;
+  margin-top: 0.1em;
   margin-bottom: 0.7rem;
   text-align: left;
 `;
