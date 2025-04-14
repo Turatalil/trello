@@ -9,62 +9,82 @@ import TurtalyLogo from "./TurtalyLogo";
 export default function RegisterForm() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
-  const [pass, setPass] = useState("")
-  const [password, setPassword] = useState(false)
+  const [pass, setPass] = useState("");
+  const [password, setPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); 
   const navigate = useNavigate();
 
   const handleRegister = () => {
     const emailUser = "Zhamshitov06@gmail.com";
     const passwordUser = "12345678";
-  
+
+    setIsLoading(true); 
+
     if (!password) {
       if (email === emailUser) {
-        setPassword(true); 
-        setError(""); 
+        setPassword(true);
+        setError("");
+        setIsLoading(false); 
       } else {
         setError("Почтаны жазууда ката кетти?");
+        setIsLoading(false); 
       }
     } else {
       if (pass === passwordUser) {
         setError("");
         setTimeout(() => {
+          setIsLoading(false); 
           navigate("/dashboard");
-        }, 2000);
+        }, 3000);
       } else {
         setError("Парольду киргизүүдө ката бар!");
+        setIsLoading(false); 
       }
     }
   };
-  
 
   return (
     <Background>
       <Card>
         <TurtalyLogo />
         <Title>Зарегистрируйтесь, чтобы продолжить</Title>
-        {!password && <Input
-          placeholder="Введите ваш адрес электронной почты"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />}
-{     password && <Input
+        {!password && (
+          <Input
+            placeholder="Введите ваш адрес электронной почты"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        )}
+        {password && (
+          <Input
             value={pass}
             onChange={(e) => setPass(e.target.value)}
             placeholder="Введите пароль"
-          />}
+            type="password" // Added type for password input
+          />
+        )}
         {error && <ErrorMessage>{error}</ErrorMessage>}
         <Note>
-          Регистрируясь, я соглашаюсь с Условиями использования продуктов Cloud и принимаю Политику конфиденциальности Atlassian.
+          Регистрируясь, я соглашаюсь с Условиями использования продуктов Cloud и
+          принимаю Политику конфиденциальности Atlassian.
         </Note>
-        <Button primary onClick={handleRegister}>
-          Зарегистрироваться
+        <Button primary onClick={handleRegister} disabled={isLoading}>
+          {isLoading ? <Spinner /> : "Зарегистрироваться"}
         </Button>
         <SmallText>Или продолжить с помощью:</SmallText>
         <SocialButtons>
-          <Button><FcGoogle size={20} /> Google</Button>
-          <Button><FaMicrosoft size={20} /> Microsoft</Button>
-          <Button><FaApple size={20} /> Apple</Button>
-          <Button><FaSlack size={20} style={{ color: "#611f69" }} /> Slack</Button>
+          <Button>
+            <FcGoogle size={20} /> Google
+          </Button>
+          <Button>
+            <FaMicrosoft size={20} /> Microsoft
+          </Button>
+          <Button>
+            <FaApple size={20} /> Apple
+          </Button>
+          <Button>
+            <FaSlack size={20} style={{ color: "#611f69" }} /> Slack
+          </Button>
         </SocialButtons>
         <LoginLink>Уже есть аккаунт Atlassian? Войти</LoginLink>
         <Divider />
@@ -72,16 +92,17 @@ export default function RegisterForm() {
           <LogoSmall src="/atlassian-logo.png" alt="Atlassian" />
           Один аккаунт для Trello, Jira, Confluence и не только. <br />
           Для защиты сайта используется система reCAPTCHA Google. <br />
-          Кроме того, действуют положения Политики конфиденциальности и Условий использования Google.
+          Кроме того, действуют положения Политики конфиденциальности и Условий
+          использования Google.
         </FooterNote>
       </Card>
-
     </Background>
   );
 }
+
 const GlobalFieldStyle = styled.div`
   margin-top: 2em;
-`
+`;
 
 const SuccessMessage = styled.p`
   color: green;
@@ -96,7 +117,6 @@ const Background = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -159,9 +179,33 @@ const Button = styled.button`
   color: ${(props) => (props.primary ? "white" : "#333")};
   border: ${(props) => (props.primary ? "none" : "1px solid #ccc")};
   cursor: pointer;
+  position: relative;
 
   &:hover {
     background-color: ${(props) => (props.primary ? "#0747a6" : "#f1f1f1")};
+  }
+
+  &:disabled {
+    background-color: ${(props) => (props.primary ? "#6699ff" : "#ffffff")};
+    cursor: not-allowed;
+  }
+`;
+
+const Spinner = styled.div`
+  border: 3px solid #ffffff;
+  border-top: 3px solid transparent;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 `;
 
