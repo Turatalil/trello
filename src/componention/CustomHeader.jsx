@@ -6,11 +6,11 @@ import { FiShare } from "react-icons/fi";
 
 
 const CustomHeader = () => {
- 
+
   return (
     <HeaderContainer>
       <LeftSection>
-    
+
         <Logo>baitur</Logo>
         <FaStar color="white" style={{ marginLeft: "10px" }} />
         <Label>

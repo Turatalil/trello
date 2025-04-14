@@ -13,7 +13,6 @@ const BellButton = () => {
 
 export default BellButton;
 
-// Анимация үчүн keyframes
 const bellRing = keyframes`
   0%, 100% {
     transform-origin: top;
@@ -35,7 +34,6 @@ const bellRing = keyframes`
   }
 `;
 
-// Кнопка стили
 const Button = styled.button`
   width: 40px;
   height: 40px;
