@@ -1,11 +1,9 @@
-
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { addList, addCardToList, removeCardFromList, removeList, updateListName, updateCardName } from "../store/slices/ButtonViaMain";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
-// Стилдер
 const Wrapper = styled.div`
   margin-left: 20px;
   display: flex;
@@ -258,7 +256,6 @@ const MenuItem = styled.button`
   }
 `;
 
-// Компонент
 const ButtonViaMain = () => {
   const [showInput, setShowInput] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -270,7 +267,9 @@ const ButtonViaMain = () => {
   const [editingCard, setEditingCard] = useState(null);
   const [editCardValue, setEditCardValue] = useState("");
 
-  const { users } = useSelector((state) => state.basket);
+  const { users, search } = useSelector((state) => state.basket);
+  console.log(search);
+  
   const dispatch = useDispatch();
 
   const handleAddClick = () => {
