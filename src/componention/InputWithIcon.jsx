@@ -1,23 +1,23 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { basketSlice } from "../store/slices/ButtonViaMain";
 
 const InputWithIcon = () => {
-  const users = useSelector((state) => state.basket?.users || []);
-  const [search, setSearch] = useState("");
-
-  const filterByName = users.filter((user) =>
-    user.name?.toLowerCase().startsWith(search.toLowerCase())
-  );
-
-  const showModal = search.trim().length > 0;
-
+  const [search, setSearch] = useState("")
+  const clickInputValue = (e)=>{
+    setSearch(e.target.value)
+    console.log(e.target.value);
+    
+    dispatch(basketSlice.actions.searchFromName(e.target.value))
+  }
+  const dispatch = useDispatch()
   return (
     <Wrapper>
       <Label>
         <StyledInput
           type="text"
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={clickInputValue}
           value={search}
           placeholder="Поиск"
           autoComplete="off"
@@ -38,23 +38,13 @@ const InputWithIcon = () => {
           </svg>
         </Icon>
       </Label>
-
-      {showModal && (
-        <Modal>
-          {filterByName.length > 0 ? (
-            filterByName.map((user) => (
-              <ModalItem key={user.id}>{user.name}</ModalItem>
-            ))
-          ) : (
-            <ModalItem>Андай тема жок!</ModalItem>
-          )}
-        </Modal>
-      )}
     </Wrapper>
   );
 };
 
 export default InputWithIcon;
+
+
 
 const Wrapper = styled.div`
   position: relative;
